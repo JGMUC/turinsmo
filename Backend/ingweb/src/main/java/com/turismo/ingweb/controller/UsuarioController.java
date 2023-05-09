@@ -8,6 +8,7 @@ import com.turismo.ingweb.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,7 @@ import com.turismo.ingweb.service.JwtService;
 import com.turismo.ingweb.service.UsuarioService;
 
 @RestController
+@CrossOrigin("*")
 public class UsuarioController {
     @Autowired
     private UsuarioService uService;

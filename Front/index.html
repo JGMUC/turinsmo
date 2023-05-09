@@ -33,6 +33,9 @@
         <button type="button" class="btn btn-login" data-bs-toggle="modal" data-bs-target="#loginModal">
           Iniciar Sesión
         </button>
+        <button type="button" class="btn btn-login" data-bs-toggle="modal" data-bs-target="#registroModal">
+          Registrarse
+        </button>
       </div>
     </div>
   </nav>
@@ -44,10 +47,41 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <iframe src="./login.html" frameborder="0" width="100%" height="250px"></iframe>
+                    <iframe src="./login.html" frameborder="0" width="100%" height="200px"></iframe>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="registroModalLabel">Registro</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <iframe src="./registro.html" frameborder="0" width="100%" height="350px"></iframe>
+              </div>
+          </div>
+      </div>
+  </div>
+
+    <div class="info-section">
+      <nav id="main-nav">
+        <ul>
+          <li><a href="#">Municipios</a></li>
+          <li><a href="#">Recorridos</a></li>
+          <li><a href="#">Atracciones</a></li>
+        </ul>
+      </nav>
+      <h2>¡Bienvenidos!</h2>
+      <p>Descubre los lugares más espectaculares de nuestro país. Con nuestra guía turística podrás conocer los rincones más hermosos y sorprendentes.</p>
+    </div>
+    <div class="image-section">
+      <h2>Turismo en cundinamarca</h2>
+      <img src="./img/ym1.jpg" alt="Imagen de turismo">
+    </div>
+    <script src="./js/index.js"></script>
 </body>
 </html>
