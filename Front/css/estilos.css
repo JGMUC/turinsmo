@@ -81,3 +81,17 @@
     height: 90%;
     object-fit: cover;
   }
+  .form-group {
+    margin-bottom: 7px;
+  }
+
+  #state_id {
+    margin-bottom: 7px;
+  }
+
+  #error-pass {
+    color: red;
+    font-size: 7px;
+  }
+
+

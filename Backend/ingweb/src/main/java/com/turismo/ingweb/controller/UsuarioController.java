@@ -6,6 +6,8 @@ import java.util.List;
 import com.turismo.ingweb.dto.AuthRequest;
 import com.turismo.ingweb.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -52,9 +54,15 @@ public class UsuarioController {
       uService.deleteUsuario(id);
     }
 
-    @PostMapping("/usuarios")    
-    public Usuario createUsuario (@RequestBody Usuario usuario){
-        return uService.creaUsuario(usuario);
+    @PostMapping("/usuario")    
+    public ResponseEntity<Usuario> createUsuario (@RequestBody Usuario usuario){
+       try{
+           Usuario nuevoUsuario=uService.creaUsuario(usuario);
+           return ResponseEntity.ok().body(nuevoUsuario);
+           
+       }catch (RuntimeException e) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+       }
     }
 
     @PutMapping("/usuarios/{id}")    

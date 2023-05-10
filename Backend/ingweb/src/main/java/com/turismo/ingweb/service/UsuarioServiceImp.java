@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.turismo.ingweb.model.Usuario;
@@ -14,7 +16,9 @@ public class UsuarioServiceImp implements UsuarioService{
     @Autowired
     private UsuarioRepository uRepository;
     
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    
     @Override
     public List<Usuario> getUsuarios() {
         
@@ -24,6 +28,7 @@ public class UsuarioServiceImp implements UsuarioService{
 
     @Override
     public Usuario creaUsuario(Usuario usuario) {
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         return uRepository.save(usuario);
     }
 
@@ -47,7 +52,12 @@ public class UsuarioServiceImp implements UsuarioService{
 
     @Override
     public Usuario updateUsuario(Usuario usuario) {
-        return uRepository.save(usuario);
+        
+        try {
+            return uRepository.save(usuario);
+        } catch (DataIntegrityViolationException e) {
+            throw new RuntimeException("Ya existe un usario con el mismo correo" ); 
+        }
     }
 
 }

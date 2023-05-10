@@ -15,7 +15,6 @@ function handleInput() {
         loginBtn.disabled = true;
     }
 }
-
 loginForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const credentials = {
@@ -30,19 +29,22 @@ loginForm.addEventListener('submit', (event) => {
         },
         body: JSON.stringify(credentials)
     })
-        .then(response => response)
+        .then(response => {
+            if (response.ok) {
+              return response.text();
+            } else {
+                throw new Error('Network response was not ok');
+                
+            }
+          })
         .then(data => {
             // Si las credenciales son correctas, data contendrá un JWT
-            if (data.status==200){
-                localStorage.setItem('jwtToken', data.text);
-                window.parent.postMessage({type: "loginSuccess"}, "*");     
-            }else{
-                errorMsg.textContent = 'Credenciales inválidas. Por favor, inténtelo de nuevo.';
-            }
-            
+                console.log(data)
+                localStorage.setItem('jwtToken', data);
+                window.parent.postMessage({type: "loginSuccess"}, "*");       
         })
         .catch(error => {
-            // Si las credenciales son incorrectas o si ocurre un error en el servidor, el catch capturará el error
+            errorMsg.textContent = 'Credenciales inválidas ingréselas nuevamente y vuelva a intentar';
             console.error(error);
         });
 });

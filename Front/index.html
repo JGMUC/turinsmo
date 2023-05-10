@@ -30,11 +30,14 @@
         </ul>
       </div>
       <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-login" data-bs-toggle="modal" data-bs-target="#loginModal">
+        <button id="iniciarsesion" type="button" class="btn btn-login" data-bs-toggle="modal" data-bs-target="#loginModal">
           Iniciar Sesión
         </button>
         <button type="button" class="btn btn-login" data-bs-toggle="modal" data-bs-target="#registroModal">
           Registrarse
+        </button>
+        <button type="button" class="btn btn-login" id="cerrarSesionBtn" style="display:none;">
+          Cerrar Sesión
         </button>
       </div>
     </div>
@@ -47,7 +50,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <iframe src="./login.html" frameborder="0" width="100%" height="200px"></iframe>
+                    <iframe src="./login.html" frameborder="0" width="100%" height="230px"></iframe>
                 </div>
             </div>
         </div>
@@ -61,7 +64,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                  <iframe src="./registro.html" frameborder="0" width="100%" height="350px"></iframe>
+                  <iframe src="./registro.html" frameborder="0" width="100%" height="550px"></iframe>
               </div>
           </div>
       </div>
