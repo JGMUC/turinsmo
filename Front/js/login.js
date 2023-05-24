@@ -21,7 +21,6 @@ loginForm.addEventListener('submit', (event) => {
         username: emailInput.value,
         password: pwdInput.value
     };
-
     fetch('http://localhost:8080/api/authenticate', {
         method: 'POST',
         headers: {
@@ -41,7 +40,8 @@ loginForm.addEventListener('submit', (event) => {
             // Si las credenciales son correctas, data contendrá un JWT
                 console.log(data)
                 localStorage.setItem('jwtToken', data);
-                window.parent.postMessage({type: "loginSuccess"}, "*");       
+                window.parent.postMessage({type: "loginSuccess"}, "*");
+                loginForm.reset()       
         })
         .catch(error => {
             errorMsg.textContent = 'Credenciales inválidas ingréselas nuevamente y vuelva a intentar';

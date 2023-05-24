@@ -23,9 +23,14 @@ email.addEventListener('input', handleInput);
 telefono.addEventListener('input', handleInput);
 contraseña.addEventListener('input', handleInput);
 confirmar.addEventListener('input', handleInput);
+var fechaActual = new Date();
+
+
+var fechaLimite = new Date(fechaActual.getFullYear() - 18, fechaActual.getMonth(), fechaActual.getDate());
+var campoFecha = document.getElementById("fechanacimiento");
+campoFecha.setAttribute("max", fechaLimite.toISOString().split("T")[0]);
 
 const errorContainer = document.getElementById('error-pass');
-
 function handleInput() {  
     if (fname.value !== "" && state_id.value !== "" && documento.value!=="" && fechanacimiento.value !== "" && email.value  !== "" && telefono.value !== "" && contraseña.value !=="" && confirmar.value !=="" ) {
         registroBtn.disabled = false;
@@ -65,8 +70,6 @@ contraseña.addEventListener('keyup', () => {
     
     errorContainer.innerHTML = errorMessage.replace(/\n/g, '<br>');
 });
-
-
 
 const form = document.querySelector('form');
 const url = 'http://localhost:8080/api/usuario';
@@ -108,7 +111,8 @@ form.addEventListener('submit', (event) => {
       return response.json();
     })
     .then(data => {
-        window.parent.postMessage({type: "registroSuccess"}, "*");    
+        window.parent.postMessage({type: "registroSuccess"}, "*");   
+        form.reset() 
         console.log('Datos enviados correctamente:', data);
 
     })
