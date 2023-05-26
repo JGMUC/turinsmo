@@ -10,7 +10,12 @@ function fillTable(data) {
         tableBody.appendChild(row);
     });
 }
-
-fetch('localhost:8080/api/usuarios')
+fetch('http://localhost:8080/api/usuarios', {
+    method: 'GET',
+    headers: {
+      'Authorization': 'Bearer ' + localStorage.getItem('jwtToken'),
+      'Content-Type': 'application/json'
+    }
+  })
     .then(response => response.json())
     .then(data => fillTable(data));

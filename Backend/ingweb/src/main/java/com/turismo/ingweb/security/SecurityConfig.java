@@ -1,7 +1,19 @@
 package com.turismo.ingweb.security;
 
 
+
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 import com.turismo.ingweb.filter.JwtAuthFilter;
+
+import java.util.Collections;
+
+
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.CorsProcessor;
+import org.springframework.web.filter.CorsFilter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +34,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-public class SecurityConfig {
+public class SecurityConfig implements WebMvcConfigurer {
     @Autowired
     private JwtAuthFilter authFilter;
 
@@ -38,13 +50,22 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/usuario","/authenticate").permitAll()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/**")
+                .authorizeHttpRequests().requestMatchers("/usuarios")
                 .authenticated().and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
+                .cors().configurationSource(request -> {
+                    CorsConfiguration config = new CorsConfiguration();
+                    config.setAllowedOrigins(Collections.singletonList("http://localhost:5500")); // Reemplaza con tu origen permitido
+                    config.setAllowedMethods(Collections.singletonList("*")); // Reemplaza con los métodos permitidos
+                    config.setAllowedHeaders(Collections.singletonList("*")); // Reemplaza con los encabezados permitidos
+                    config.setAllowCredentials(true);
+                    return config;
+                })
+                .and()
                 .build();
     }
 
@@ -65,5 +86,5 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
-
+   
 }
