@@ -50,7 +50,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .authorizeHttpRequests()
                 .requestMatchers("/usuario","/authenticate").permitAll()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/usuarios")
+                .authorizeHttpRequests().requestMatchers("/**")
                 .authenticated().and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

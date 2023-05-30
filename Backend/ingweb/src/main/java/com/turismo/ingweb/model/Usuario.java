@@ -44,6 +44,9 @@ public class Usuario {
     @Column(name="usu_telefono")
     private String telefono;
 
-    @Column(name ="usu_intereses ")
+    @Column(name ="usu_intereses")
     private String intereses;
+
+    @Column(name ="usu_estado")
+    private String estado;
 }

@@ -21,17 +21,13 @@ public class UsuarioServiceImp implements UsuarioService{
     
     @Override
     public List<Usuario> getUsuarios() {
-        
-        return uRepository.findAll();
-        
+        return uRepository.findAll();   
     }
-
     @Override
     public Usuario creaUsuario(Usuario usuario) {
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         return uRepository.save(usuario);
     }
-
 
     @Override
     public Usuario getUsuario(Long id) {
@@ -54,7 +50,15 @@ public class UsuarioServiceImp implements UsuarioService{
     public Usuario updateUsuario(Usuario usuario) {
         
         try {
-            return uRepository.save(usuario);
+            Optional<Usuario> optionalUsuario = uRepository.findById(usuario.getId());
+            if (optionalUsuario.isPresent()) {
+                Usuario existingUsuario = optionalUsuario.get();
+                existingUsuario.setEstado(usuario.getEstado());
+                return uRepository.save(existingUsuario);
+            }else{
+                    throw new RuntimeException("Usuario no encontrado");
+            }
+
         } catch (DataIntegrityViolationException e) {
             throw new RuntimeException("Ya existe un usario con el mismo correo" ); 
         }

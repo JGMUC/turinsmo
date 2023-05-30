@@ -88,7 +88,8 @@ form.addEventListener('submit', (event) => {
     documento:documento.value,
     fecha_nacimiento:fechanacimiento.value,
     telefono:telefono.value,
-    intereses:message.value
+    intereses:message.value,
+    estado:'A'
 };
 
   const options = {
