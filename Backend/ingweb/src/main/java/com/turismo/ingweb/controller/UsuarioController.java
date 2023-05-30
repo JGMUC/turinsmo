@@ -34,6 +34,7 @@ import com.turismo.ingweb.service.UsuarioService;
 public class UsuarioController {
     @Autowired
     private UsuarioService uService;
+    
     @Autowired
     private JwtService jwtService;
 
