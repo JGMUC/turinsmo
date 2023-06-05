@@ -5,6 +5,8 @@ window.addEventListener("message", function(event) {
       const bootstrapModal = bootstrap.Modal.getInstance(loginModal);
       document.getElementById("cerrarSesionBtn").style.display = "block";
       document.getElementById("iniciarsesion").style.display = "none";
+      document.getElementById("usuariosbtn").style.display = "block";
+      document.getElementById("municipiosbtn").style.display = "block";
       bootstrapModal.hide();
     }
     if (event.data.type === "registroSuccess") {
@@ -18,6 +20,8 @@ const logoutButton = document.getElementById("cerrarSesionBtn");
 
 logoutButton.addEventListener("click", function() {
   localStorage.removeItem("jwtToken");
+  document.getElementById("usuariosbtn").style.display = "none";
+  document.getElementById("municipiosbtn").style.display = "none";
   document.getElementById("cerrarSesionBtn").style.display = "none";
   document.getElementById("iniciarsesion").style.display = "block";
 });
